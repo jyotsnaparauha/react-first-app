@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import React,{useState} from 'react';
 import './App.css';
+import ShowData from './component/ShowData';
 
+import ContactItem from './component/ContactItem';
+import ContactForm from './component/ContactForm';
+
+const Dummy_data=[{   id:'e1',
+                       userName:'',
+                       lastName:'',
+                       email:'',
+                       message:'',
+                       additinalDetail:'',
+}];
 function App() {
+     const[data,setData]=useState(Dummy_data);
+     
+    
+   const addEnteredData=(entereItem)=>{
+      
+      setData((prevState)=>{
+        return[...prevState,entereItem]
+      });
+   };
+   
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    
+    <ContactItem onSubmit={addEnteredData}  />
+    <ShowData items={data}/>
     </div>
   );
+ 
 }
 
 export default App;
